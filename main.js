@@ -21,17 +21,72 @@ const quotes = {
     ]
 };
 
+let currentCategory = ""
+let currentIndex = -1
+const quoteDisplay = document.getElementById("quoteDisplay")
+
+function showQuote(category,index){
+    const list =quotes[category]
+    
+    if(!list || list.length == 0){
+        quoteDisplay.textContent = 'No Quote available'
+        return
+    }
+    quoteDisplay.textContent = list[index]
+}
+
+
+
 document.getElementById("generate").addEventListener("click", () => {
 
-    const category =document.getElementById("category").value
+    currentCategory =document.getElementById("category").value
 
-    const quoteDisplay =document.getElementById("quoteDisplay")
 
-    if(!category || !quoteDisplay){
+    if(!currentCategory || !quotes[currentCategory]){
         quoteDisplay.textContent = 'Please select category to get quote'
         return
     }
 
-    const randomIndex =Math.floor(Math.random()*quotes[category].length)
-    quoteDisplay.textContent =quotes[category][randomIndex]
+    currentIndex =Math.floor(Math.random()*quotes[currentCategory].length)
+    showQuote(currentCategory, currentIndex)
+})
+
+document.getElementById("random").addEventListener("click", () =>{
+    if (!currentCategory || !quotes[currentCategory]) {
+
+        quoteDisplay.textContent = "Please select a category first"
+        return
+    }
+
+    currentIndex = Math.floor(Math.random() * quotes[currentCategory].length)
+    showQuote(currentCategory, currentIndex)
+})
+
+document.getElementById("previous").addEventListener("click", () => {
+
+    if (!currentCategory || !quotes[currentCategory]){
+
+        quoteDisplay.textContent = "Please select a category first"
+        return
+    }
+
+    currentIndex--
+    if (currentIndex <0){
+
+        currentIndex =quotes[currentCategory].length -1
+    }
+    showQuote(currentCategory, currentIndex)
+})
+
+document.getElementById("next").addEventListener("click", () =>{
+    if (!currentCategory || !quotes[currentCategory]){
+        quoteDisplay.textContent ="Please select a category first"
+        return;
+    }
+
+    currentIndex++
+    if (currentIndex >=quotes[currentCategory].length){
+        currentIndex =0
+    }
+    showQuote(currentCategory, currentIndex)
 })
