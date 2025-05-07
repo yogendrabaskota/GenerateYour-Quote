@@ -21,3 +21,12 @@ const quotes = {
     ]
 };
 
+document.getElementById("generate").addEventListener("click", () => {
+
+    const category =document.getElementById("category").value
+    
+    const quoteDisplay =document.getElementById("quoteDisplay")
+
+    const randomIndex =Math.floor(Math.random()*quotes[category].length)
+    quoteDisplay.textContent =quotes[category][randomIndex]
+})
