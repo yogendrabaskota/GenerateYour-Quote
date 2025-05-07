@@ -24,8 +24,13 @@ const quotes = {
 document.getElementById("generate").addEventListener("click", () => {
 
     const category =document.getElementById("category").value
-    
+
     const quoteDisplay =document.getElementById("quoteDisplay")
+
+    if(!category || !quoteDisplay){
+        quoteDisplay.textContent = 'Please select category to get quote'
+        return
+    }
 
     const randomIndex =Math.floor(Math.random()*quotes[category].length)
     quoteDisplay.textContent =quotes[category][randomIndex]
