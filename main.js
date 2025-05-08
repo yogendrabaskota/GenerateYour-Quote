@@ -24,6 +24,9 @@ const quotes = {
 let currentCategory = ""
 let currentIndex = -1
 const quoteDisplay = document.getElementById("quoteDisplay")
+let currentFontSize = 18;
+
+quoteDisplay.style.fontSize = currentFontSize + "px";
 
 function showQuote(category,index){
     const list =quotes[category]
@@ -69,7 +72,6 @@ document.getElementById("previous").addEventListener("click", () => {
         quoteDisplay.textContent = "Please select a category first"
         return
     }
-
     currentIndex--
     if (currentIndex <0){
 
@@ -89,4 +91,17 @@ document.getElementById("next").addEventListener("click", () =>{
         currentIndex =0
     }
     showQuote(currentCategory, currentIndex)
+})
+
+document.getElementById("increase").addEventListener("click",() =>{
+    if(currentFontSize <40){
+        currentFontSize +=2;
+        quoteDisplay.style.fontSize =currentFontSize +"px";
+    }
+})
+document.getElementById("decrease").addEventListener("click", ()=>{
+    if (currentFontSize> 10){
+        currentFontSize -=2;
+        quoteDisplay.style.fontSize =currentFontSize +"px";
+    }
 })
